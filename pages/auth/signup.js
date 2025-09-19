@@ -398,6 +398,7 @@ export default function signup() {
           </div>
           <form onSubmit={handleSubmit}>
             {error && <div className="auth_error">{error}</div>}}
+            }
             <div className="auth_name_fields">
               <div className="auth_input_group">
                 <label htmlFor="firstname">First name</label>
