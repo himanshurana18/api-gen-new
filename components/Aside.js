@@ -22,7 +22,7 @@ export default function Aside() {
               <IoHomeOutline />
               <span>Home</span>
             </Link>
-            <Link href="/">
+            <Link href="/manager">
               <BiLeaf />
               <span>Content Manager</span>
             </Link>
