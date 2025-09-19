@@ -1,5 +1,4 @@
 import { Schema, models, model } from "mongoose";
-import { create } from "sortablejs";
 
 const RoleSchema = new Schema(
   {
@@ -10,7 +9,7 @@ const RoleSchema = new Schema(
       lowercase: true,
       datatype: "textinput",
     },
-    permission: {
+    permissions: {
       create: {
         type: Boolean,
         default: false,
@@ -39,7 +38,6 @@ const RoleSchema = new Schema(
     },
     description: {
       type: String,
-
       datatype: "textarea",
       default: function () {
         return `${this.name} role`;
@@ -51,15 +49,16 @@ const RoleSchema = new Schema(
       datatype: "toggleinput",
     },
   },
-
   { timestamps: true }
 );
+
 RoleSchema.pre("save", function (next) {
   if (this.name) {
     this.name = this.name.toLowerCase();
   }
   next();
 });
+
 // Virtual getter for display name with proper capitalization
 RoleSchema.virtual("displayName").get(function () {
   return this.name.charAt(0).toUpperCase() + this.name.slice(1);

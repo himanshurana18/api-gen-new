@@ -26,11 +26,10 @@ export default function Profileform({
     if (status === 'loading') {
         return (
             <div className="flex flex-center wh_100">
-                Loading...
+                <div>Loading...</div>
             </div>
         );
     }
-    console.log(avtar);
 
     async function updateProfile(ev) {
         ev.preventDefault();
@@ -49,22 +48,19 @@ export default function Profileform({
         }
         if (_id) {
             try {
-                try{
-                    await axios.put('/api/auth/profile', data);
-                    toast.success('Profile Updated!');
-                }catch(error){
-                    if(error.response.status === 403){
-                        toast.error("Permission denied to Demo User.");
-                    }
-                }
+                await axios.put('/api/auth/profile', data);
+                toast.success('Profile Updated!');
             } catch (error) {
-                console.error('Error updating profile:', error);
-                toast.error('Failed to update profile.');
+                if (error.response && error.response.status === 403) {
+                    toast.error("Permission denied to Demo User.");
+                } else {
+                    console.error('Error updating profile:', error);
+                    toast.error('Failed to update profile.');
+                }
             }
         } else {
             toast.error('Profile not found.');
         }
-
     }
 
     const togglePasswordVisibility = () => {

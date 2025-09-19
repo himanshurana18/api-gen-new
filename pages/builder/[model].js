@@ -719,7 +719,7 @@ import { set } from "mongoose";
 
 export default function BuilderDynamic() {
   const { data: session } = useSession();
-  const { success, setSuccess } = useState(false);
+  const [success, setSuccess] = useState(false);
   const [hasChanges, setHasChanges] = useState(false);
 
   const [newModelPopup, setNewModelPopup] = useState(false);
